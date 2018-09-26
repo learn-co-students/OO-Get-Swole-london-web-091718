@@ -10,7 +10,9 @@ class Membership
     ALL << self
   end
 
-  def self.all 
+
+#  Get a list of all memberships
+  def self.all
     ALL
   end
 

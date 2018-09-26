@@ -9,6 +9,7 @@ class Gym
 
   end
 
+# Get a list of all gyms
   def self.all
     ALL
   end
@@ -20,7 +21,7 @@ class Gym
       m.gym == self
     end
   end
-  
+
   def lifters
     #Access all memberships
     #our gym?
@@ -48,4 +49,32 @@ class Gym
     lifter_liftable_weight
   end
 
+# - Get a list of all memberships at a specific gym
+  def gym_memberships
+    Membership.all.select do |membership|
+      membership.gym == self
+    end
+  end
+
+# - Get a list of all the lifters that have a membership to a specific gym
+  def lifters_gym
+    gym_memberships.map do |membership|
+      membership.lifter
+    end
+  end
+
+# Get a list of the names of all lifters that have a membership to that gym
+  def lifter_names_gym
+    lifters_gym.map do |lifter|
+      lifter.name
+    end
+  end
+
+# - Get the combined lift_total of every lifter has a membership to that gym
+  def total_lift
+    sum = 0
+    lifters_gym.map do |lifter|
+    sum += lifter.lift_total
+    end
+  end
 end
