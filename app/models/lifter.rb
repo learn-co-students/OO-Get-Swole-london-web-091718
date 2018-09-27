@@ -2,7 +2,6 @@
 class Lifter
   @@all = []
 
-
   attr_reader :name, :lift_total
 
   def initialize(name, lift_total)
@@ -10,10 +9,12 @@ class Lifter
     @lift_total = lift_total
     @@all << self
   end
+
   def sign_up(cost, gym)
     #Create membership
     Membership.new(cost, self, gym)
   end
+
   def memberships
     #Access membership => [memberships]
     #Select all memberships for specific member
@@ -34,8 +35,19 @@ class Lifter
     end
   end
 
-  def self.all 
+  def self.all
     @@all
+  end
+
+  def total_cost
+    self.memberships.map do |m|
+      m.cost
+    end.inject {|sum, cost| sum + cost}
+  end
+
+  def self.average_lift
+    arr = self.all.map {|lifter| lifter.lift_total}
+    arr.inject {|sum, num| sum + num} / arr.length
   end
 
 end

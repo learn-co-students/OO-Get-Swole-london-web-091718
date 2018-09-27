@@ -1,3 +1,5 @@
+require "pry"
+
 class Gym
  ALL = []
 
@@ -6,7 +8,6 @@ class Gym
   def initialize(name)
     @name = name
     ALL << self
-
   end
 
   def self.all
@@ -20,7 +21,7 @@ class Gym
       m.gym == self
     end
   end
-  
+
   def lifters
     #Access all memberships
     #our gym?
@@ -48,4 +49,11 @@ class Gym
     lifter_liftable_weight
   end
 
+  def lift_total_for_gym
+    self.lifters.map do |lifter|
+      lifter.lift_total
+    end.inject {|sum, num| sum + num}
+  end
+
 end
+p "eof"
