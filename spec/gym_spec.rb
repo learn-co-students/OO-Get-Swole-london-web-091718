@@ -8,9 +8,9 @@ describe "Gym" do
   pf = Gym.new("Planet Fitness")
   bob = Lifter.new("Bob", 700)
   tracy = Lifter.new("Tracy", 800)
-  a = Membership.new(bob, golds, 500)
-  b = Membership.new(tracy, golds, 400)
-  c = Membership.new(tracy, pf, 700)
+  a = Membership.new(500, bob, golds)
+  b = Membership.new(400, tracy, golds)
+  c = Membership.new(700, tracy, pf)
 
   describe "#new" do
     it "initializes with a name" do
