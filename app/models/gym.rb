@@ -38,7 +38,7 @@ class Gym
     end
   end
 
-  def total_lifter_liftable_weight
+  def lift_total_for_gym
     lifter_liftable_weight = 0
     #get lifters
     self.lifters.each do |l|

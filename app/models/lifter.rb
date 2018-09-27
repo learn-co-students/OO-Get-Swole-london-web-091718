@@ -34,6 +34,22 @@ class Lifter
     end
   end
 
+  def self.sum_of_lift_total_of_all_lifters
+    sum=0
+    @@all.map { |l| l.lift_total }.each { |t| sum+=t }
+    sum
+  end
+
+  def self.average_lift
+    sum_of_lift_total_of_all_lifters / @@all.count
+  end
+
+  def total_cost
+    total = 0
+    memberships.map { |m| m.cost }.each { |c| total+=c }
+    total
+  end
+
   def self.all 
     @@all
   end
