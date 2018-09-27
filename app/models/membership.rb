@@ -1,18 +1,18 @@
+require 'pry'
+
 class Membership
-  @@all = []
+    attr_accessor :lifter, :gym, :cost
+    @@all = []
 
-  attr_reader :cost, :lifter, :gym
+    def initialize(lifter, gym, cost)
+        @lifter = lifter
+        @gym = gym
+        @cost = cost
+        @@all << self
+    end
 
-  def initialize(cost, lifter, gym)
-    @cost = cost
-    @lifter = lifter
-    @gym = gym
-    @@all << self
-  end
-
-  def self.all 
-    ALL
-  end
-
-
+    #Get a list of all memberships
+    def self.all
+        @@all
+    end
 end
