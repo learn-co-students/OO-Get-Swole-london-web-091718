@@ -12,8 +12,17 @@ class Gym
     ALL
   end
 
+  def memberships
+    result=[]
+    Membership.all.each do |membership|
+      result << membership if membership.gym == self
+    end
+    result
+  end
+
+
   def membership_at_specific_gym
-    Membership.all.map do |membership|
+    Membership.all.select do |membership|
       membership if membership.gym==self
     end
   end
