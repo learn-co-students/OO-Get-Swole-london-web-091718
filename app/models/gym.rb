@@ -6,7 +6,6 @@ class Gym
   def initialize(name)
     @name = name
     ALL << self
-
   end
 
   def self.all
@@ -14,38 +13,42 @@ class Gym
   end
 
   def memberships
-    #Access all memberships => [Memberships]
-    #determine wheter or not the membership belongs to this gym (self)
-    Membership.all.select do |m|
-      m.gym == self
+    result=[]
+    Membership.all.each do |membership|
+      result << membership if membership.gym == self
     end
+    result
   end
-  
-  def lifters
-    #Access all memberships
-    #our gym?
-    #make array of lifters from said memberships
-    self.memberships.map do |m|
-      m.lifter
+
+
+  def membership_at_specific_gym
+    Membership.all.select do |membership|
+      membership if membership.gym==self
     end
   end
 
-  def lifter_names
-    #get lifters
-    #get names
-    self.lifters.map do |l|
-      l.name
+  def lifter_list_at_specific_gym
+    result=[]
+    Membership.all.each do |membership|
+      result<<membership.lifter.name if membership.gym==self
+    end
+    result
+  end
+
+  def list_all_lifters_in_this_gym
+    Membership.all.select  do |membership|
+      membership.lifters if membership.gym==self
     end
   end
 
-  def total_lifter_liftable_weight
-    lifter_liftable_weight = 0
-    #get lifters
-    self.lifters.each do |l|
-      #add all of their weight
-      lifter_liftable_weight += l.lift_total
-    end
-    lifter_liftable_weight
+  def get_list_of_names_in_gym
+    list_all_lifters_in_this_gym.map {|lifter| lifter.name}
   end
 
-end
+  def combined_lift_total
+    result=list_all_lifters_in_this_gym.map {|lifter| lifter.lift_total}
+    result.each {|e| sum += e}
+  end
+
+
+end#class
