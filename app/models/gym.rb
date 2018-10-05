@@ -1,3 +1,5 @@
+require 'pry'
+
 class Gym
  ALL = []
 
@@ -13,6 +15,7 @@ class Gym
     ALL
   end
 
+
   def memberships
     #Access all memberships => [Memberships]
     #determine wheter or not the membership belongs to this gym (self)
@@ -20,7 +23,7 @@ class Gym
       m.gym == self
     end
   end
-  
+
   def lifters
     #Access all memberships
     #our gym?
@@ -46,6 +49,21 @@ class Gym
       lifter_liftable_weight += l.lift_total
     end
     lifter_liftable_weight
+  end
+
+#Get the combined lift_total of every lifter has a membership to that gym
+  # def lift_total_for_gym
+  #   memberships.map{|membership| membership.cost}.inject(&:+)
+  # end
+
+  # def lift_total_for_gym
+  #   self.lifters.inject(&:+)
+  #   # Membership.all.select{|membership| membership}
+  #   # .map{|membership| membership.cost}.inject(&:+)
+  # end
+
+  def lift_total_for_gym
+    lifters.map {|lifter| lifter.lift_total}.inject(&:+)
   end
 
 end

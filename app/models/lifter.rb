@@ -34,8 +34,31 @@ class Lifter
     end
   end
 
-  def self.all 
+  def self.all
     @@all
+  end
+
+  def self.average_lift
+    memberships.map{|membership| membership.lift_total}.inject(&:+) / self.all.count
+  end
+
+  def sign_up(gym, cost)
+    Membership.new(self, gym, cost)
+  end
+
+  def total_cost
+    memberships.map{|membership| membership.cost}.inject(&:+)
+  end
+
+# returns the average lift_total of all lifters
+
+  def self.average_lift
+    count = self.all.count
+    self.all.map{|lifter| lifter.lift_total}.inject(&:+) / count
+  end
+
+  def sign_up(cost, gym)
+    Membership.new(self, gym, cost)
   end
 
 end
